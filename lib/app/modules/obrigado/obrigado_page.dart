@@ -223,7 +223,9 @@ class _ObrigadoPageState extends State<ObrigadoPage> {
               padding: EdgeInsets.only(top: 10),
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                _recadinhoResult();
+              },
               child: Text(
                 'Enviar',
                 style: TextStyle(color: Colors.white),
@@ -232,6 +234,20 @@ class _ObrigadoPageState extends State<ObrigadoPage> {
             )
           ],
         ));
+  }
+
+  void _recadinhoResult() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            height: 60,
+            child: ListTile(
+              leading: Icon(Icons.check_circle),
+              title: Text('Recadinho enviado com sucesso!'),
+            ),
+          );
+        });
   }
 
   void _capturarImagem() {
