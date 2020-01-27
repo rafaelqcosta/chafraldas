@@ -1,3 +1,4 @@
+import 'package:site_babycha/app/widgets/confirmar_presenca/confirmar_presenca_bloc.dart';
 import 'package:site_babycha/app/app_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'modules/obrigado/obrigado_module.dart';
 class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
+        Bind((i) => ConfirmarPresencaBloc()),
         Bind((i) => AppBloc()),
       ];
 

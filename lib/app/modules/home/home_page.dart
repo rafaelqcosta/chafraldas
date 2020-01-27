@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../model/recados.dart';
+import '../../widgets/confirmar_presenca/confirmar_presenca_widget.dart';
 import 'home_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -175,31 +173,81 @@ class _HomePageState extends State<HomePage> {
                   Icons.date_range,
                   size: 40,
                 ),
-                title: Text('Dia 16 de Fevereiro'),
+                title: Text('Dia 8 de Fevereiro'),
                 subtitle: Text('às 11:00h'),
               ),
-              ListTile(
-                leading: GestureDetector(
-                  onTap: () async {
-                    if (await canLaunch(
-                        'https://goo.gl/maps/n5xyyA5VHHEb5J5f7')) {
-                      await launch('https://goo.gl/maps/n5xyyA5VHHEb5J5f7');
-                    }
-                  },
-                  child: Icon(
+              GestureDetector(
+                onTap: () async {
+                  if (await canLaunch(
+                      'https://goo.gl/maps/n5xyyA5VHHEb5J5f7')) {
+                    await launch('https://goo.gl/maps/n5xyyA5VHHEb5J5f7');
+                  }
+                },
+                child: ListTile(
+                  leading: Icon(
                     Icons.location_on,
                     color: Colors.blue,
                     size: 40,
                   ),
+                  title: Text('Local'),
+                  subtitle: Text(
+                      'Casa da Tia Paulinha. \nSHIS Qi 7, Conj. 4, casa 11 \nCasinha amarela.'),
                 ),
-                title: Text('Local'),
-                subtitle: Text(
-                    'Casa da Tia Paulinha. \nSHIS Qi 7, Conj. 4, casa 11 \nCasinha amarela.'),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.wb_sunny,
+                  size: 40,
+                ),
+                title: Text('O que levar?'),
+                subtitle: Text('Roupa de banho \nO que for beber'),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 20),
+              ),
+              MaterialButton(
+                color: Colors.blue,
+                child: Text('Confirmar Presença'),
+                onPressed: () {
+                  _confirmarPresenca();
+                },
               ),
             ],
           ),
         )
       ],
+    );
+  }
+
+  void _confirmarPresenca() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // retorna um objeto do tipo Dialog
+        return AlertDialog(
+          title: new Text("Confirme sua presença"),
+          content: Container(
+            child: ConfirmarPresencaWidget(),
+          ),
+          actions: <Widget>[
+            // define os botões na base do dialogo
+            MaterialButton(
+              color: Colors.blue,
+              child: new Text("Cancelar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            MaterialButton(
+              color: Colors.blue,
+              child: new Text("Enviar"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
